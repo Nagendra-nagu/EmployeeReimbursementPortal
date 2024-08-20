@@ -14,7 +14,7 @@
       </p>
 
       <div class="d-flex justify-content-between mt-4">
-        <%= link_to 'Edit', edit_company_user_path(@company, @employee), class: "btn btn-warning" %>
+        <a href="#" onclick="openGlobalModal('<%= edit_company_user_path(@company, @employee) %>', 'Edit User')" class='btn btn-secondary'>Edit</a>
         <%= link_to 'View Reimbursement Claims', company_user_reimbursement_claims_path(@company, @employee), class: 'btn btn-info' %>
         <%= link_to 'Back', company_path(@company), class: "btn btn-secondary" %>
       </div>

@@ -44,12 +44,22 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
+# authenticator
 gem 'devise'
 gem 'omniauth-google-oauth2'
-gem 'kaminari' # For pagination
+
+# For pagination
+gem 'kaminari'
+
+# For UI
 gem 'bootstrap', '~> 5.2.3'
 gem 'jquery-rails'
-gem 'aws-sdk-s3' # For S3 integration
+
+ # For S3 integration
+gem 'aws-sdk-s3'
+
+# writing  business logic
+gem 'interactor-rails', '~> 2.1', '>= 2.1.1'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

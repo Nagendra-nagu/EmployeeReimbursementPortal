@@ -5,14 +5,20 @@ class ReimbursementClaimsController < ApplicationController
     before_action :set_reimbursement_claim, only: [:show, :edit, :update, :destroy]
   
     def index
-      @reimbursement_claims = @employee.reimbursement_claims
+      @reimbursement_claims = @employee.reimbursement_claims.page(params[:page] || 1).per(10)
     end
   
     def show
+      respond_to do |format|
+        format.js { render partial: 'reimbursement_claims/partials/show' }
+      end
     end
   
     def new
       @reimbursement_claim = @employee.reimbursement_claims.build
+      respond_to do |format|
+        format.js { render partial: 'reimbursement_claims/partials/new' }
+      end
     end
   
     def create
@@ -25,6 +31,9 @@ class ReimbursementClaimsController < ApplicationController
     end
   
     def edit
+      respond_to do |format|
+        format.js { render partial: 'reimbursement_claims/partials/edit' }
+      end
     end
   
     def update

@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-12">
+    <p><b>Purpose</b>: <%= @reimbursement_claim.purpose %></p>
+  </div>
+  <div class="col-12">
+    <p><b>Amount</b>: <%= number_to_currency(@reimbursement_claim.amount) %></p>
+  </div>
+
+  <div class="col-12">
+    <p><b>Date of Expenditure</b>: <%= @reimbursement_claim.date_of_expenditure %></p>
+  </div>
+  <div class="col-12">
+    <p class="card-text">
+      <% if @reimbursement_claim.receipt.attached? %>
+        <%= link_to 'View Receipt', rails_blob_path(@reimbursement_claim.receipt, disposition: 'inline'), target: '_blank', class: 'btn btn-info' %>
+      <% else %>
+        <span class="text-muted">No receipt available</span>
+      <% end %>
+    </p>
+  </div>
+</div>

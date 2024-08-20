@@ -1,0 +1,38 @@
+<div id="globalModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="globalModalLabel" class="modal-title">Modal Title</h5>
+      </div>
+      <div class="modal-body">
+        <!-- Dynamic content will be injected here -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="closeFooterBtn">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Function to open the modal and load content dynamically
+    window.openGlobalModal = function(url, title) {
+      fetch(url)
+        .then(response => response.text())
+        .then(html => {
+          const modal = document.querySelector('#globalModal');
+          modal.querySelector('.modal-body').innerHTML = html; // Inject content
+          modal.querySelector('#globalModalLabel').textContent = title; // Set title
+          
+          $('#globalModal').modal('show'); // Show the modal using Bootstrap
+        })
+        .catch(error => console.error('Error loading modal content:', error));
+    };
+
+    // jQuery onclick event to close the modal when clicking the close buttons
+    $('#closeFooterBtn').on('click', function() {
+      document.querySelector('#globalModal').classList.remove('show');
+    });
+  });
+</script>

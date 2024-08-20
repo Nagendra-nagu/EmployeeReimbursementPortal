@@ -3,14 +3,18 @@ class CompaniesController < ApplicationController
     before_action :set_company, only: [:show, :edit, :update, :destroy]
   
     def index
-      @companies = Company.all
+      @companies = Company.page(params[:page] || 1).per(10)
     end
   
     def show
+      @users = @company.users.page(params[:page] || 1).per(10)
     end
   
     def new
       @company = Company.new
+      respond_to do |format|
+        format.js { render partial: 'companies/partials/new' }
+      end
     end
   
     def create
@@ -23,6 +27,16 @@ class CompaniesController < ApplicationController
     end
   
     def edit
+      respond_to do |format|
+        format.js { render partial: 'companies/partials/edit' }
+      end
+    end
+
+    def open_model
+      @some_data = User.last
+      respond_to do |format|
+        format.js { render partial: 'companies/partials/test' }
+      end
     end
   
     def update

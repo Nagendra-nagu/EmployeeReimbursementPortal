@@ -2,7 +2,8 @@
   <div class="text-center mb-4">
     <h1 class="text-primary"><%= @company.name %></h1>
     <h2 class="text-secondary">Users</h2>
-    <div class="text-end"><%= link_to 'New User', new_company_user_path(@company), class: "btn btn-primary mb-3" %></div>
+    <div class="text-end"><a href="#" onclick="openGlobalModal('<%= new_company_user_path(@company) %>', 'New User')" class='btn btn-primary mb-3'>New User</a></div>
+
   </div>
 
   <div class="card">
@@ -17,15 +18,16 @@
           </tr>
         </thead>
         <tbody>
-          <% @company.users.each do |user| %>
+          <% @users.each do |user| %>
             <tr>
-              <td><%= link_to user.fname, [@company, user], class: "text-primary" %></td>
+              <td><a href="#" onclick="openGlobalModal('<%= company_user_path(@company, user) %>', 'User Details')" class='text-primary'><%= user.fname %></a></td>
+
               <td><%= user.lname %></td>
               <td>
                 <%= link_to 'View Claims', company_user_reimbursement_claims_path(@company, user), class: '' %>
               </td>
               <td class="text-center">
-                <%= link_to 'Edit', edit_company_user_path(@company, user), class: "btn btn-secondary btn-sm" %>
+                <a href="#" onclick="openGlobalModal('<%= edit_company_user_path(@company, user) %>', 'Edit User')" class='btn btn-secondary btn-sm'>Edit</a>
                 <a href="<%= company_user_path(@company, user) %>" class="delete-link btn btn-danger btn-sm ml-2" data-url="<%= company_user_path(@company, user) %>" data-method="delete">Delete</a>
               </td>
             </tr>
@@ -35,9 +37,10 @@
     </div>
   </div>
 
-  <div class="text-center mt-3">
+  <div class="mt-3 text-end">
     <%= link_to 'Back to Companies', companies_path, class: "btn btn-secondary" %>
   </div>
+  <%= paginate @users %>
 </div>
 
 <script>

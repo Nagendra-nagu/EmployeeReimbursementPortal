@@ -1,0 +1,13 @@
+<div class="container mt-4">
+  <div class="d-flex flex-column align-items-center">
+    <%- if controller_name != 'sessions' %>
+      <%= link_to "Log in", new_session_path(resource_name), class: 'btn btn-outline-primary mb-2' %><br />
+    <% end %>
+
+    <%- if devise_mapping.omniauthable? %>
+      <%- resource_class.omniauth_providers.each do |provider| %>
+        <%= button_to "Sign in with Google", omniauth_authorize_path(resource_name, provider), class: 'btn btn-outline-success mb-2', data: { turbo: false } %><br />
+      <% end %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: postgres
+  password: postgres
+  host: localhost
+
+development:
+  <<: *default
+  database: reimbursement_portal_development
+
+test:
+  <<: *default
+  database: reimbursement_portal_test
+
+production:
+  <<: *default
+  database: reimbursement_portal_production
+
+# If you're using environment variables to store your database password,
+# ensure that you have set `REIMBURSEMENT_PORTAL_DATABASE_PASSWORD`
+# in your environment for development, test, and production.

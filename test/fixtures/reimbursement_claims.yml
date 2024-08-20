@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  purpose: MyString
+  amount: 9.99
+  date_of_expenditure: 2024-08-20
+  receipt: MyString
+  employee: one
+
+two:
+  purpose: MyString
+  amount: 9.99
+  date_of_expenditure: 2024-08-20
+  receipt: MyString
+  employee: two

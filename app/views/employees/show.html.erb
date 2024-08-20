@@ -1,0 +1,17 @@
+<div class="container mt-4">
+  <h1 class='text-primary text-center mb-4'>Employee Details</h1>
+  
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title"><%= @employee.first_name %> <%= @employee.last_name %></h5>
+      <p class="card-text">
+        <strong>Company:</strong> <%= @company.name %><br>
+        <strong>ID:</strong> <%= @employee.id %>
+      </p>
+
+      <%= link_to 'Edit', edit_company_employee_path(@company, @employee), class: "btn btn-warning" %>
+      <%= link_to 'Back', company_path(@company), class: "btn btn-secondary" %>
+      <%= link_to 'View Reimbursement Claims', company_employee_reimbursement_claims_path(@company, @employee), class: 'btn btn-info mt-3' %>
+    </div>
+  </div>
+</div>

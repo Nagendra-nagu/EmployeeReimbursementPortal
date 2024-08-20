@@ -64,7 +64,7 @@ Devise.setup do |config|
   # These keys will have whitespace before and after removed upon creating or
   # modifying a user and when used to authenticate or find a user. Default is :email.
   config.strip_whitespace_keys = [:email]
-  config.omniauth :google_oauth2, '453915589180-505cb6ef1qdb9p0317dpjm5o050u6v4a.apps.googleusercontent.com', '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'
+  config.omniauth :google_oauth2, Rails.application.credentials.dig(:google_oauth, :client_id), Rails.application.credentials.dig(:google_oauth, :client_secret)
 
   # Tell if authentication through request.params is enabled. True by default.
   # It can be set to an array that will enable params authentication only for the

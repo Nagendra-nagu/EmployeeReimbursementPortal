@@ -46,7 +46,7 @@ class ReimbursementClaimsController < ApplicationController
   
     def destroy
       @reimbursement_claim.destroy
-      redirect_to company_employee_reimbursement_claims_url(@company, @employee), notice: 'Reimbursement claim was successfully destroyed.'
+      redirect_to company_user_reimbursement_claims_path(@company, @employee), notice: 'Reimbursement claim was successfully destroyed.'
     end
   
     private

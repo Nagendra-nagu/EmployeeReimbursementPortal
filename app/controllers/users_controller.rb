@@ -27,7 +27,7 @@ class UsersController < ApplicationController
         redirect_to [@company, @employee], notice: 'Employee was successfully created.'
       else
         flash[:alert] = result.error
-        render :new
+        # render :new
       end
     end
   

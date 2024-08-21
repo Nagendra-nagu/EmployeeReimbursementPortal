@@ -1,6 +1,9 @@
 class Company < ApplicationRecord
+    validates :name, presence: true
     has_many :users
     has_many :reimbursement_claims, through: :employees
+
+    validates :name, presence: true, length: { minimum: 2, maximum: 100 }
 
     def employee_count
         users.count

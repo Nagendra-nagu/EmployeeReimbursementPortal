@@ -8,6 +8,10 @@ class User < ApplicationRecord
   belongs_to :company, optional: true
   has_many :reimbursement_claims
 
+  validates :fname, presence: true, length: { minimum: 2, maximum: 50 }
+  validates :lname, length: { minimum: 2, maximum: 50 }, allow_blank: true
+  validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: true
+
   def self.from_omniauth(auth)
     # Attempt to find the user by provider and uid
     user = User.find_by(provider: auth.provider, uid: auth.uid)

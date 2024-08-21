@@ -22,7 +22,9 @@ class CompaniesController < ApplicationController
       if @company.save
         redirect_to @company, notice: 'Company was successfully created.'
       else
-        render :new
+        respond_to do |format|
+          format.js { render partial: 'companies/partials/new' }
+        end
       end
     end
   

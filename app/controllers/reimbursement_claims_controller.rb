@@ -24,7 +24,7 @@ class ReimbursementClaimsController < ApplicationController
     def create
       @reimbursement_claim = @employee.reimbursement_claims.build(reimbursement_claim_params)
       if @reimbursement_claim.save
-        redirect_to [@company, @employee, @reimbursement_claim], notice: 'Reimbursement claim was successfully created.'
+        redirect_to request.referer, notice: 'Reimbursement claim was successfully created.'
       else
         render :new
       end
@@ -38,9 +38,11 @@ class ReimbursementClaimsController < ApplicationController
   
     def update
       if @reimbursement_claim.update(reimbursement_claim_params)
-        redirect_to [@company, @employee, @reimbursement_claim], notice: 'Reimbursement claim was successfully updated.'
+        redirect_to request.referer || company_user_reimbursement_claims_path(@company, @user), notice: 'Reimbursement claim was successfully updated.'
       else
-        render :edit
+        respond_to do |format|
+          format.js { render partial: 'reimbursement_claims/partials/edit' }
+        end
       end
     end
   

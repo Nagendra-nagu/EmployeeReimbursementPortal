@@ -24,7 +24,7 @@ class UsersController < ApplicationController
       result = CreateUser.call(employee_params: employee_params, company: @company)
       @employee = result.employee
       if result.status == :success
-        redirect_to [@company, @employee], notice: 'Employee was successfully created.'
+        redirect_to [@company], notice: 'Employee was successfully created.'
       else
         flash[:alert] = result.error
         # render :new
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
   
     def update
       if @employee.update(employee_params)
-        redirect_to [@company, @employee], notice: 'Employee was successfully updated.'
+        redirect_to [@company], notice: 'Employee was successfully updated.'
       else
         render :edit
       end

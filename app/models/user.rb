@@ -3,19 +3,30 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2]
 
-  # Add enum for role
   enum role: { user: 0, admin: 1, employee: 2 }
 
-  # Associations
   belongs_to :company, optional: true
   has_many :reimbursement_claims
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0, 20]
-      user.name = auth.info.name
-      user.remote_avatar_url = auth.info.image
+    # Attempt to find the user by provider and uid
+    user = User.find_by(provider: auth.provider, uid: auth.uid)
+    
+    # If no user is found, check if a user exists with the given email
+    unless user
+      user = User.find_by(email: auth.info.email.downcase)
+      if user
+        # Update user details from the OAuth data
+        user.provider = auth.provider
+        user.uid = auth.uid
+        user.fname = auth.info.first_name
+        user.lname = auth.info.last_name
+        user.email = auth.info.email
+        user.save
+      end
     end
+  
+    user
   end
+  
 end

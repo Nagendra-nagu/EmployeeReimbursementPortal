@@ -47,6 +47,7 @@ gem "bootsnap", require: false
 # authenticator
 gem 'devise'
 gem 'omniauth-google-oauth2'
+gem "omniauth-rails_csrf_protection"
 
 # For pagination
 gem 'kaminari'
@@ -60,6 +61,9 @@ gem 'aws-sdk-s3'
 
 # writing  business logic
 gem 'interactor-rails', '~> 2.1', '>= 2.1.1'
+
+# provides a way to store session data in a database 
+gem 'activerecord-session_store'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

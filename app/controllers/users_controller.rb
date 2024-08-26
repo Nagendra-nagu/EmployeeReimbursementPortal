@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-    before_action :authenticate_user!
     before_action :set_company
     before_action :set_employee, only: [:show, :edit, :update, :destroy]
   

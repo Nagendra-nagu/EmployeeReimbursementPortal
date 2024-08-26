@@ -14,20 +14,16 @@ class User < ApplicationRecord
 
   def self.from_omniauth(auth)
     # Attempt to find the user by provider and uid
-    user = User.find_by(provider: auth.provider, uid: auth.uid)
+    user = User.find_by(provider: auth.provider, uid: auth.uid) || User.find_by(email: auth.info.email.downcase)
     
-    # If no user is found, check if a user exists with the given email
-    unless user
-      user = User.find_by(email: auth.info.email.downcase)
-      if user
-        # Update user details from the OAuth data
-        user.provider = auth.provider
-        user.uid = auth.uid
-        user.fname = auth.info.first_name
-        user.lname = auth.info.last_name
-        user.email = auth.info.email
-        user.save
-      end
+    if user
+      # Update user details from the OAuth data
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user.fname = auth.info.first_name
+      user.lname = auth.info.last_name
+      user.email = auth.info.email
+      user.save
     end
   
     user

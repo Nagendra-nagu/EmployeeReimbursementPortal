@@ -1,5 +1,4 @@
 class ReimbursementClaimsController < ApplicationController
-    before_action :authenticate_user!
     before_action :set_company
     before_action :set_employee
     before_action :set_reimbursement_claim, only: [:show, :edit, :update, :destroy]
